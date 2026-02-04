@@ -7,6 +7,8 @@ import com.sparta.scheduleapp.repository.ScheduleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service // 스프링이 관리하는 서비스 클래스 선언
 @RequiredArgsConstructor // final이 붙은 필드(repository)를 생성자 주입 방식으로 가져오기
 public class ScheduleService {
@@ -23,5 +25,24 @@ public class ScheduleService {
 
         // 저장된 엔티티를 응답용 DTO로 변환하여 반환
         return new ScheduleResponseDto(savedSchedule);
+    }
+    // 전체 일정 조회
+    public List<ScheduleResponseDto> getSchedules(String author) {
+
+        if (author != null) {
+            return scheduleRepository.findAllByAuthorOrderByUpdatedAtDesc(author)
+                    .stream().map(ScheduleResponseDto::new).toList();
+        }
+        // 전체 목록을 최신순으로 반환
+        return scheduleRepository.findAllByOrderByUpdatedAtDesc()
+                .stream().map(ScheduleResponseDto::new).toList();
+    }
+
+    // 특정 일정 1개만 조회 (ID 사용)
+    public ScheduleResponseDto getSchedule(Long id) {
+        // DB에서 ID로 찾는데 없으면 에러 띄우기
+        Schedule schedule = scheduleRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 일정이 존재하지 않습니다."));
+        return new ScheduleResponseDto(schedule);
     }
 }
