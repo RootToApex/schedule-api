@@ -63,4 +63,20 @@ public class ScheduleService {
 
         return id;
     }
+    @Transactional
+    public Long deleteSchedule(Long id, String password) {
+        // 해당 일정이 있는지 확인
+        Schedule schedule = scheduleRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 일정이 존재하지 않습니다."));
+
+        // 비밀번호 일치 여부 확인
+        if (!schedule.getPassword().equals(password)) {
+            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+        }
+
+        // 일치하면 삭제
+        scheduleRepository.delete(schedule);
+
+        return id;
+    }
 }

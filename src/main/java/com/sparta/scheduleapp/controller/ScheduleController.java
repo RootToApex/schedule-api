@@ -43,4 +43,9 @@ public class ScheduleController {
     public Long updateSchedule(@PathVariable Long id, @RequestBody ScheduleRequestDto requestDto) {
         return scheduleService.updateSchedule(id, requestDto);
     }
+    // 일정 삭제 API (주소: DELETE /api/schedules/1)
+    @DeleteMapping("/schedules/{id}")
+    public Long deleteSchedule(@PathVariable Long id, @RequestParam String password) {
+            return scheduleService.deleteSchedule(id, password);
+    }
 }
