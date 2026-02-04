@@ -7,8 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RestController // JSON 데이터를 반환하는 컨트롤러임을 선언합니다.
-@RequestMapping("/api") // 모든 API 주소 앞에 /api가 붙도록 설정합니다.
+@RestController // JSON 데이터를 반환하는 컨트롤러임을 선언
+@RequestMapping("/api") // 모든 API 주소 앞에 /api가 붙도록 설정
 @RequiredArgsConstructor
 public class ScheduleController {
 
