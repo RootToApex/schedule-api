@@ -37,4 +37,10 @@ public class ScheduleController {
         // @PathVariable: 주소창에 적힌 {id} 번호를 변수로
         return scheduleService.getSchedule(id);
     }
+
+    // 일정 수정 API (주소: PUT /api/schedules/1)
+    @PutMapping("/schedules/{id}")
+    public Long updateSchedule(@PathVariable Long id, @RequestBody ScheduleRequestDto requestDto) {
+        return scheduleService.updateSchedule(id, requestDto);
+    }
 }

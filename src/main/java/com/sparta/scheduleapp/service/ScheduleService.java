@@ -6,6 +6,7 @@ import com.sparta.scheduleapp.entity.Schedule;
 import com.sparta.scheduleapp.repository.ScheduleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -44,5 +45,22 @@ public class ScheduleService {
         Schedule schedule = scheduleRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 일정이 존재하지 않습니다."));
         return new ScheduleResponseDto(schedule);
+    }
+
+    @Transactional // 변경 감지
+    public Long updateSchedule(Long id, ScheduleRequestDto requestDto) {
+        // 해당 일정이 있는지 확인
+        Schedule schedule = scheduleRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 일정이 존재하지 않습니다."));
+
+        // 비밀번호 일치 여부 확인
+        if (!schedule.getPassword().equals(requestDto.getPassword())) {
+            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+        }
+
+        // 일치하면 수정
+        schedule.update(requestDto);
+
+        return id;
     }
 }
