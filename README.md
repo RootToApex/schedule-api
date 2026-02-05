@@ -64,7 +64,7 @@
 
 | **Method** | **URL** | **인증** |
 | --- | --- | --- |
-| PATCH (또는 PUT) | `/api/schedules/{id}` | - |
+| PUT | `/api/schedules/{id}` | - |
 
 **Path Parameters**
 
@@ -118,9 +118,9 @@
 | **이름** | **도메인 (Domain)** | **타입 (Type)** |
 | --- | --- | --- |
 | **id** | Domain | **bigint** |
-| **title** | Domain | **varchar(200)** |
-| **content** | Domain | **text** |
-| **author** | Domain | **varchar(100)** |
-| **password** | Domain | **varchar(100)** |
+| **title** | Domain | **varchar(255)** |
+| **content** | Domain | **varchar(500)** |
+| **author** | Domain | **varchar(255)** |
+| **password** | Domain | **varchar(255)** |
 | **created_at** | Domain | **datetime** |
 | **updated_at** | Domain | **datetime** |
