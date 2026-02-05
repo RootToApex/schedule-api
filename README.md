@@ -110,3 +110,17 @@
     - 삭제된 일정의 `id`
 - `500 Internal Server Error`
     - 비밀번호 불일치 시 예외 발생
+
+---
+
+### ERD
+
+| **이름** | **도메인 (Domain)** | **타입 (Type)** |
+| --- | --- | --- |
+| **id** | Domain | **bigint** |
+| **title** | Domain | **varchar(200)** |
+| **content** | Domain | **text** |
+| **author** | Domain | **varchar(100)** |
+| **password** | Domain | **varchar(100)** |
+| **created_at** | Domain | **datetime** |
+| **updated_at** | Domain | **datetime** |
